@@ -28,7 +28,9 @@ An Exmaple Ladder:
 
 ## Site map
 
-A [site map](documentation/site-map.png) of how the pages are related to each other. Each edge refers to a reference that redirects the user to the connected pages. The user will begin at the /leagues page.
+![sitmap](documentation/site-map.png)
+
+A site map of how the pages are related to each other. Each edge refers to a reference that redirects the user to the connected pages. The user will begin at the /leagues page.
 
 ## Wireframes
 
