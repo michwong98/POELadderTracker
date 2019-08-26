@@ -16,13 +16,6 @@ const leagueSchema = new mongoose.Schema({
 });
 mongoose.model("League", leagueSchema);
 
-const userSchema = new mongoose.Schema({
-	"name": {type: String, required: true},
-	"password": {type: String, required:true},
-	"visits": {type: Number, required: true}
-});
-mongoose.model("User", userSchema);
-
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
 let dbconf;
 if (process.env.NODE_ENV === 'PRODUCTION') {

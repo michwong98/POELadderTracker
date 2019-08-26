@@ -10,7 +10,6 @@ require("./db.js");
 const mongoose = require("mongoose");
 const League = mongoose.model("League");
 const Ladder = mongoose.model("Ladder");
-const User = mongoose.model("User");
 
 app.set("view engine", "hbs");
 app.use(express.urlencoded({extended: false}));
@@ -18,78 +17,12 @@ const staticPath = path.resolve(__dirname, "public");
 app.use(express.static(staticPath));
 app.use(cookieParser());
 
-app.use("/:path",function(req, res, next) { //checks if user is logged in or not
-	const p = new Promise(function(fulfill) {
-		const id = req.cookies.sessionid;
-		User.findOne({"_id": id}, function(err, foundUser) {
-			if (err) { //failed to find
-				console.log(err);
-				fulfill(false);
-			} else if (foundUser === null) { //login doesn't exist
-				fulfill(false);
-			} else { //user is found, increments visits
-				foundUser.visits++;
-				foundUser.save(function(err) {
-					if (err) {
-						console.log(err);
-						fulfill(false);
-					} else {
-						fulfill(true);
-					}
-				});
-			}
-		});
-	});
-	p.then(function(val) {
-		if (val) { //logged in
-			next();
-		} else if (req.params.path !== "") { //redirect to index to log in
-			res.redirect("/");
-		} else { //normally unreachable
-			next();
-		}
-	});
-});
-
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
 
 app.get("/", (req, res) => {
-	res.render("index.hbs");
-});
-
-app.post("/", (req, res) => {
-	const name = req.body.name;
-	const password = req.body.password;
-	if (name === "" || password === "") { //missing field
-		res.redirect("/");
-	} else {
-		User.findOne({"name": name, "password":password}, function(err, foundUser) {
-			if (err) {
-				console.log(err);
-				res.redirect("/");
-			} else if (foundUser === null) { //not an existing user, register
-				const newUser = new User({
-					"name": name,
-					"password": password,
-					"visits": 0
-				});
-				newUser.save(function(err) {
-					if (err) {
-						console.log(err);
-						res.redirect("/");
-					} else {
-						res.set("Set-Cookie", `sessionid=${newUser["_id"]}`); //sessionid
-						res.redirect("/leagues");
-					}
-				});
-			} else { //user exists
-				res.set("Set-Cookie", `sessionid=${foundUser["_id"]}`);
-				res.redirect("/leagues");
-			}
-		});
-	}
+	res.redirect("/leagues");
 });
 
 app.get("/initial", (req, res) => { //league information is missing, need to geneerate
@@ -288,7 +221,7 @@ const filter = {
 
 };
 
-//setInterval(updateData, 846000); //updates completely every 24 hours
+setInterval(updateData, 846000); //updates completely every 24 hours
 
 function updateData() { //updates all leagues and ladders
 	console.log("Updating ladder data");
