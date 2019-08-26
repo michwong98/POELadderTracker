@@ -1,0 +1,34 @@
+<h1 style="display:block;background-color:grey;border-style:solid;border-color:black;border-width:2px;text-align:center;padding:15px;font-size:48px">Search</h1>
+<p>Adds new ladders to track into the database. Will begin to update new ladders during the next update cycle (100 times per day).<br>
+Note: Due to the nature of the ladders. Labyrinth produces the most interesting results. Delve changes are very gradual since it is close to the beginning of the next ladder reset.
+</p>
+<form method="POST" action="/search">
+<div style="display:block;background-color:white;padding:10px">
+<h1>Search:</h1>
+<select name="league">
+	<option selected disabled>League</option>
+	{{#each leagues}}
+		<option value="{{id}}">{{id}}</option>
+	{{/each}}
+</select>
+
+<select name="ladder">
+	<option selected disabled>Ladder</option>
+	<option value="labyrinth">Labyrinth</option>
+	<option value="depthsolo">Solo Delve</option>
+	<option value="depth">Delve</option>
+</select>
+
+<select name="class">
+	<option selected disabled>Class(Optional)</option>
+	<option value="0">Scion</option>
+	<option value="1">Marauder</option>
+	<option value="2">Ranger</option>
+	<option value="3">Witch</option>
+	<option value="4">Duelist</option>
+	<option value="5">Templar</option>
+	<option value="6">Shadow</option>
+</select>
+<input type="submit">
+</div>
+</form>

@@ -1,0 +1,19 @@
+<h1 id="ladder-title" style="border-style:solid;border-color:black;border-width:2px;display:block;background-color:grey;text-align:center;padding:15px;font-size:48px"></h1>
+
+<form method="get" action="/leagues">
+	<input type="submit" value="Return to Leagues" />
+</form>
+<p>
+<br>
+
+
+<canvas id="myChart"></canvas>
+</p>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript" src="/javascripts/graph.js"></script>
+<script type="text/javascript">
+   MYLIBRARY.init(["{{id}}"]);
+   document.addEventListener("DOMContentLoaded", MYLIBRARY.main);
+</script>
+<br>
+<a href="/leagues/ladder/{{id}}/raw" style="color:black">Raw Data</a>

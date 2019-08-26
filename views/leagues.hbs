@@ -1,0 +1,20 @@
+<h1 style="display:block;background-color:grey;border-style:solid;border-color:black;border-width:2px;text-align:center;padding:15px;font-size:48px">Leagues in Database:</h1>
+<form action="/search" method="search">
+	<input type="submit" value="Track New Ladders" />
+</form>
+<br>
+{{#each leagues}}
+<div class="leagues">
+	<div class="league-text">
+	<h1>League: <a href="/leagues/{{id}}" style="color:black">{{id}}</a></h1>
+	{{#each ladders}}
+		<p style="font-size:18px">
+		<a href="{{url}}" style="color:black">api</a> - <a href="/leagues/ladder/{{_id}}" style="color:black">{{description}}</a><br>
+		</p>
+	{{/each}}
+	</div>
+</div>
+<br>
+{{/each}}
+<br><br>
+<a href="/leagues/raw" style="color:black">leaguedetails</a>
